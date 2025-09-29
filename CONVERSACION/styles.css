@@ -1,0 +1,249 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+}
+
+/* Contenedor principal con efecto Glass */
+.contenedor-principal {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Caja del chat */
+.caja-chat {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+/* Encabezado con efecto neon */
+.encabezado-chat {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+.barra-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.etiqueta-ateo, .etiqueta-creyente {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 6px 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.etiqueta-vs {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ffcc70;
+    text-shadow: 0 0 10px #ffcc70;
+}
+
+/* Área de mensajes con scroll suave */
+.area-mensajes {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(6px);
+    scroll-behavior: smooth;
+}
+
+/* Mensajes generales */
+.mensaje {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    position: relative;
+    animation: fadeInUp 0.4s ease;
+}
+
+.remitente {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.contenido {
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Animación para los mensajes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensaje de tema (usuario) */
+.mensaje-usuario {
+    align-self: center;
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffe082;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Mensaje del ATEO */
+.ateo-mensaje {
+    align-self: flex-start;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #fff;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 4px 12px rgba(66,165,245,0.4);
+}
+
+/* Mensaje del CREYENTE */
+.creyente-mensaje {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #ab47bc, #8e24aa);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 12px rgba(171,71,188,0.4);
+}
+
+/* Pie de chat */
+.pie-chat {
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+}
+
+/* Botones con estilo brutal */
+.contenedor-botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.contenedor-botones button {
+    padding: 12px 26px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#boton-iniciar {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    box-shadow: 0 4px 15px rgba(106,17,203,0.5);
+}
+
+#boton-limpiar {
+    background: rgba(255,255,255,0.1);
+    color: #eee;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.contenedor-botones button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Indicador de cargando */
+.mensaje-cargando {
+    display: none;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: #ffeb3b;
+    font-weight: bold;
+    margin: 15px auto;
+    animation: blink 1.5s infinite;
+}
+
+/* Error */
+.mensaje-error {
+    display: none;
+    text-align: center;
+    padding: 15px;
+    background: rgba(244,67,54,0.2);
+    color: #ff5252;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid rgba(244,67,54,0.4);
+    font-weight: bold;
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        height: 100vh;
+        border-radius: 0;
+        max-width: 100%;
+    }
+    
+    .caja-chat {
+        height: 100%;
+    }
+    
+    .mensaje {
+        max-width: 90%;
+    }
+    
+    .contenedor-botones {
+        flex-direction: column;
+    }
+    
+    .contenedor-botones button {
+        width: 100%;
+    }
+}
