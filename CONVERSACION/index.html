@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Debate: IA Atea vs IA Creyente</title>
 
-    <!-- Hoja de estilos externa -->
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div class="contenedor-principal">
-        <!-- Caja principal del chat -->
         <div class="caja-chat">
-            <!-- Encabezado con los nombres de los participantes -->
             <header class="encabezado-chat">
                 <div class="barra-titulo">
                     <span class="etiqueta-ateo">ATEO</span>
@@ -21,16 +18,13 @@
                 </div>
             </header>
 
-            <!-- Área donde se mostrarán los mensajes del debate -->
             <section class="area-mensajes" id="area-mensajes">
-                <!-- Mensaje inicial del ateo -->
                 <div class="mensaje ateo-mensaje">
                     <div class="remitente">ATEO</div>
                     <div class="contenido">
                         Hola, soy el ATEO. Baso mis argumentos en evidencia científica y razonamiento lógico.
                     </div>
                 </div>
-                <!-- Mensaje inicial del creyente -->
                 <div class="mensaje creyente-mensaje">
                     <div class="remitente">CREYENTE</div>
                     <div class="contenido">
@@ -39,27 +33,22 @@
                 </div>
             </section>
 
-            <!-- Pie de chat con botones de interacción -->
             <footer class="pie-chat">
                 <div class="contenedor-botones">
-                    <!-- Botón para iniciar el debate automático -->
                     <button id="boton-iniciar">Iniciar Debate</button>
-                    <!-- Botón para limpiar y reiniciar el chat -->
                     <button id="boton-limpiar">Limpiar Chat</button>
                 </div>
             </footer>
         </div>
 
-        <!-- Mensaje que aparece cuando se está generando una respuesta -->
         <div class="mensaje-cargando" id="mensaje-cargando">
             <p>Generando respuesta... Por favor espera.</p>
         </div>
 
-        <!-- Área para mostrar mensajes de error -->
         <div class="mensaje-error" id="mensaje-error"></div>
     </div>
 
-    <!-- Archivo JavaScript con toda la lógica -->
     <script src="script.js"></script>
 </body>
 </html>
+
