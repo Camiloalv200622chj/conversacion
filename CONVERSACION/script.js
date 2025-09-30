@@ -19,7 +19,6 @@ const botonLimpiar = document.getElementById('boton-limpiar');
 const mensajeCargando = document.getElementById('mensaje-cargando');
 const mensajeError = document.getElementById('mensaje-error');
 
-// Cuando la página se carga, se asignan los eventos a los botones
 document.addEventListener('DOMContentLoaded', () => {
     botonIniciar.addEventListener('click', iniciarDebateAutomatico);
     botonLimpiar.addEventListener('click', limpiarChat);
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function obtenerRespuestaGemini(prompt, mensaje) {
     try {
-        // Se hace la petición HTTP tipo POST con fetch
         const respuesta = await fetch(`${URL_API}?key=${API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -42,16 +40,13 @@ async function obtenerRespuestaGemini(prompt, mensaje) {
             })
         });
 
-        // error 
         if (!respuesta.ok) {
             const errorData = await respuesta.json();
             throw new Error(errorData.error?.message || `Error HTTP: ${respuesta.status}`);
         }
 
-        // convierte respuesta a JSON
         const datos = await respuesta.json();
 
-        // Se extrae el texto generado por la IA
         if (datos.candidates && datos.candidates[0].content.parts[0].text) {
             return datos.candidates[0].content.parts[0].text;
         } else {
@@ -63,7 +58,6 @@ async function obtenerRespuestaGemini(prompt, mensaje) {
     }
 }
 
-// Función que agrega un mensaje en la interfaz 
 function agregarMensaje(tipo, texto) {
     const divMensaje = document.createElement('div');
     divMensaje.classList.add('mensaje');
@@ -88,7 +82,6 @@ function agregarMensaje(tipo, texto) {
         `;
     }
 
-    // Se agrega al área de mensajes y se hace scroll hacia abajo
     areaMensajes.appendChild(divMensaje);
     areaMensajes.scrollTop = areaMensajes.scrollHeight;
 }
@@ -96,8 +89,7 @@ function agregarMensaje(tipo, texto) {
 
 async function iniciarDebateAutomatico() {
     mostrarCargando(true);
-    botonIniciar.disabled = true; // Desactiva botón mientras carga la charla 
-
+    botonIniciar.disabled = true;
     const temas = [
         "¿Existe evidencia suficiente para afirmar o negar la existencia de Dios?",
         "¿Puede la ciencia explicar todo lo que existe en el universo?",
@@ -109,29 +101,23 @@ async function iniciarDebateAutomatico() {
         "¿La experiencia espiritual es suficiente prueba de la existencia de Dios?"
     ];
 
-    // escoge tema automatico 
     const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
 
-    //  tema del chat
     agregarMensaje('usuario', `Tema de debate: ${temaAleatorio}`);
 
     try {
-        // 1. Responde el ATEO
         const respuestaAteo = await obtenerRespuestaGemini(PROMPT_ATEO, temaAleatorio);
         if (respuestaAteo) {
             agregarMensaje('ateo', `ATEO: ${respuestaAteo}`);
 
-            // 2. Responde el CREYENTE a lo que le dijo el ateo 
             const respuestaCreyente = await obtenerRespuestaGemini(PROMPT_CREYENTE, respuestaAteo);
             if (respuestaCreyente) {
                 agregarMensaje('creyente', `CREYENTE: ${respuestaCreyente}`);
 
-                // 3. Replica el ATEO
                 const contraAteo = await obtenerRespuestaGemini(PROMPT_ATEO, respuestaCreyente);
                 if (contraAteo) {
                     agregarMensaje('ateo', `ATEO: ${contraAteo}`);
 
-                    // 4. Replica el CREYENTE
                     const contraCreyente = await obtenerRespuestaGemini(PROMPT_CREYENTE, contraAteo);
                     if (contraCreyente) {
                         agregarMensaje('creyente', `CREYENTE: ${contraCreyente}`);
@@ -142,12 +128,11 @@ async function iniciarDebateAutomatico() {
     } catch (error) {
         mostrarError(`Error en el debate: ${error.message}`);
     } finally {
-        mostrarCargando(false); // Oculta mensaje cargando 
-        botonIniciar.disabled = false; // Reactiva botón
+        mostrarCargando(false); 
+        botonIniciar.disabled = false; 
     }
 }
 
-// Limpia el chat y muestra un mensaje inicial de presentación
 function limpiarChat() {
     areaMensajes.innerHTML = `
         <div class="mensaje ateo-mensaje">
@@ -161,12 +146,10 @@ function limpiarChat() {
     `;
 }
 
-// Muestra y oculta el indicador de "cargando"
 function mostrarCargando(mostrar) {
     mensajeCargando.style.display = mostrar ? 'block' : 'none';
 }
 
-// Muestra un mensaje de error durante 5 segundos
 function mostrarError(texto) {
     mensajeError.textContent = texto;
     mensajeError.style.display = 'block';
@@ -174,3 +157,4 @@ function mostrarError(texto) {
         mensajeError.style.display = 'none';
     }, 5000);
 }
+
